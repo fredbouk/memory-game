@@ -1,0 +1,202 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Spicy Rice', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Spicy Rice', cursive;
+    font-weight: 300;
+}
+
+
+/*Styles for the deck of cards*/
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY();
+    background: #02b3e4;
+    cursor: default;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+        cursor: default;
+        background: #02ccba;
+        font-size: 33px;
+        animation: yes linear 0.8s;
+        animation-iteration-count: 1;
+        transform-origin: 50% 50%;
+}
+      
+      @keyframes yes {
+        0% {
+          transform:  translate(0px,0px)  ;
+        }
+        15% {
+          transform:  translate(0px,-25px)  ;
+        }
+        30% {
+          transform:  translate(0px,0px)  ;
+        }
+        45% {
+          transform:  translate(0px,-15px)  ;
+        }
+        60% {
+          transform:  translate(0px,0px)  ;
+        }
+        75% {
+          transform:  translate(0px,-5px)  ;
+        }
+        100% {
+          transform:  translate(0px,0px)  ;
+        }
+      }
+
+.deck .card.incorrect {
+    background:red;
+    animation: nope linear 1s;
+    animation-iteration-count: 1;
+    transform-origin: 50% 50%;
+}
+  
+  @keyframes nope {
+    0% {
+      transform:  translate(0px,0px)  ;
+    }
+    10% {
+      transform:  translate(-10px,0px)  ;
+    }
+    20% {
+      transform:  translate(10px,0px)  ;
+    }
+    30% {
+      transform:  translate(-10px,0px)  ;
+    }
+    40% {
+      transform:  translate(10px,0px)  ;
+    }
+    50% {
+      transform:  translate(-10px,0px)  ;
+    }
+    60% {
+      transform:  translate(10px,0px)  ;
+    }
+    70% {
+      transform:  translate(-10px,0px)  ;
+    }
+    80% {
+      transform:  translate(10px,0px)  ;
+    }
+    90% {
+      transform:  translate(-10px,0px)  ;
+    }
+    100% {
+      transform:  translate(0px,0px)  ;
+    }
+  }
+
+
+/*Styles for the Score Panel*/
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .right-panel {
+    float: right;
+}
+
+.score-panel .right-panel .reset {
+    cursor: pointer;
+}
+
+
+/*Make responsive for mobile e.g. Nexus 5*/
+
+@media screen and (max-width: 361px) {
+
+  .score-panel {
+    width: 80%;
+  } 
+
+  .deck {
+    width: 94%;
+    padding: 16px;
+    min-height: 350px;
+  }
+
+  .deck .card {
+    width: 70px;
+    height: 70px;
+  }
+
+}
