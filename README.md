@@ -17,3 +17,5 @@ The game keeps track of the time and the number of moves you've made.
 You begin with 3 stars displayed on the score panel area. The number of moves you make during the game will decrease this star rating.
 
 The game ends once all cards have been correctly matched.
+
+[Play game](https://fredbouk.github.io/memory-game/)
