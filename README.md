@@ -19,3 +19,5 @@ You begin with 3 stars displayed on the score panel area. The number of moves yo
 The game ends once all cards have been correctly matched.
 
 [Play game](https://fredbouk.github.io/memory-game/)
+
+![Screenshot](img/screenshot.jpg?raw=true")
