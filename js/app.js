@@ -1,5 +1,6 @@
 (function(){
 
+//shuffeling function
 function shuffle(array) {
   let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -16,26 +17,34 @@ function shuffle(array) {
 
 //shuffles and updates cards on page
 function shuffleCards() {
+  //get all cards from the DOM
   const allCards = document.querySelectorAll('.card')
 
+  //reset the cards classes
   allCards.forEach(function(card) {
     card.classList.remove('open','show','match','incorrect')
   });
 
+  //create an empty array to hold the inner HTML of all the cards
   const allCardsInnerHTML = [];
 
+  //add the inner HTML of all cards to the allCardsInnerHTML array
   allCards.forEach(function(card) { 
     allCardsInnerHTML.push(card.innerHTML);
   });
 
+  //shuffeles the cards and stores them in a new array
   const shuffeledCards = shuffle(allCardsInnerHTML);
 
+  //adds each shuffeled card's HTML to the page 
   for (let i = 0; i < allCards.length; i++) {
     allCards[i].innerHTML = shuffeledCards[i]; 
   }
 }
 
 shuffleCards();
+
+/******************************************************************/
 
 //used to see if card is aldready in the matchedCards array
 function containsObject(obj, array) {
@@ -47,20 +56,24 @@ function containsObject(obj, array) {
   return false;
 }
 
+//display a card
 function displayCard(evt) {
   evt.target.classList.add('open','show');
 }
 
+//display a card thats matched
 function displayMatched(evt) {
   evt.target.classList.remove('open','show');
   evt.target.classList.add('match');
 }
 
+//display a card thats mismatched
 function displayMismatched(evt) {
   evt.target.classList.add('incorrect');
   setTimeout(function() {resetClasses(evt);}, 1000);
 }
 
+//clear a cards classes
 function resetClasses(evt) {
   evt.target.classList.remove('open','show','incorrect');
 }
@@ -101,6 +114,7 @@ function startGameTime() {
   document.querySelector('.timer').innerHTML = `${seconds} Seconds`;
 } 
 
+//reset everything
 function resetGame() {
   clearInterval(gameTime);
   seconds = 0;
@@ -128,25 +142,33 @@ function resetGame() {
   shuffleCards();
 }
 
-//when a card is clicked
+/******************************************************************/
+
+//sets up the event listener for a card when it is clicked
 document.querySelector('.deck').addEventListener('click', function(evt) {
+  //checks to see that it is a card that your're clicking, not an icon
   if (evt.target.className === 'card') {
-   
+    
+    //if the card is alread in matchedCards, do nothing
     if (! containsObject(evt.target,matchedCards)) {
 
+      //if the times isn't already started, start it
       if (!gameTime) { 
           gameTime = setInterval(startGameTime, 1000);
         }
-
+      
+      //if openCard1 is empty, add to openCard1
       if (!openCard1) {
           displayCard(evt);
           openCard1 = evt;
        }
-      
+
+        //if openCard2 is empty, add to openCard2
         else {
           displayCard(evt);
           openCard2 = evt;
-       
+          
+          //if card 2 has the same symbol as card 1, tag the cards with matched class and push them to the matched array, empty card1+2 variables and add 1 move
           if (openCard2.target.firstElementChild.className == openCard1.target.firstElementChild.className) {
               displayMatched(openCard1);
               displayMatched(openCard2);
@@ -160,7 +182,7 @@ document.querySelector('.deck').addEventListener('click', function(evt) {
               adjustStars();
 
           
-          //winning the game  
+          //winning: if all the cards are matched, meaning they're all in the matched cards array, stop the timer and display the modal  
           if (matchedCards.length == 16) {
               const finishingTime = seconds;
               clearInterval(gameTime);
@@ -171,7 +193,7 @@ document.querySelector('.deck').addEventListener('click', function(evt) {
             }    
           
         }
-          
+            //if the cards don't have the same symbol, display red mismatch, clear class tags, empty card1+2 variables and add 1 move
             else {
               displayMismatched(openCard1);
               displayMismatched(openCard2);
@@ -188,5 +210,6 @@ document.querySelector('.deck').addEventListener('click', function(evt) {
   }
 });
 
+//sets up the event listener for the reset button
 document.querySelector('.reset').addEventListener('click', function() {resetGame();});
 })();
