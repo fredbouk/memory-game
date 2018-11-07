@@ -1,7 +1,7 @@
-(function(){
+(function () {
 
 //shuffeling function
-function shuffle(array) {
+function shuffle (array) {
   let currentIndex = array.length, temporaryValue, randomIndex;
 
   while (currentIndex !== 0) {
@@ -16,20 +16,20 @@ function shuffle(array) {
 }
 
 //shuffles and updates cards on page
-function shuffleCards() {
+function shuffleCards () {
   //get all cards from the DOM
   const allCards = document.querySelectorAll('.card')
 
   //reset the cards classes
-  allCards.forEach(function(card) {
-    card.classList.remove('open','show','match','incorrect')
+  allCards.forEach(function (card) {
+    card.classList.remove('open', 'show', 'match', 'incorrect')
   });
 
   //create an empty array to hold the inner HTML of all the cards
   const allCardsInnerHTML = [];
 
   //add the inner HTML of all cards to the allCardsInnerHTML array
-  allCards.forEach(function(card) { 
+  allCards.forEach(function (card) { 
     allCardsInnerHTML.push(card.innerHTML);
   });
 
@@ -47,7 +47,7 @@ shuffleCards();
 /******************************************************************/
 
 //used to see if card is aldready in the matchedCards array
-function containsObject(obj, array) {
+function containsObject (obj, array) {
   for (let i = 0; i < array.length; i++) {
       if (array[i] === obj) {
           return true;
@@ -57,25 +57,25 @@ function containsObject(obj, array) {
 }
 
 //display a card
-function displayCard(evt) {
-  evt.target.classList.add('open','show');
+function displayCard (evt) {
+  evt.target.classList.add('open', 'show');
 }
 
 //display a card thats matched
-function displayMatched(evt) {
-  evt.target.classList.remove('open','show');
+function displayMatched (evt) {
+  evt.target.classList.remove('open', 'show');
   evt.target.classList.add('match');
 }
 
 //display a card thats mismatched
-function displayMismatched(evt) {
+function displayMismatched (evt) {
   evt.target.classList.add('incorrect');
-  setTimeout(function() {resetClasses(evt);}, 1000);
+  setTimeout(function () {resetClasses(evt); }, 1000);
 }
 
 //clear a cards classes
-function resetClasses(evt) {
-  evt.target.classList.remove('open','show','incorrect');
+function resetClasses (evt) {
+  evt.target.classList.remove('open', 'show', 'incorrect');
 }
 
 let matchedCards = [];
@@ -96,7 +96,7 @@ function updateMoveCounter () {
 }
 
 //adjust number of stars on page
-function adjustStars() {
+function adjustStars () {
   const star = document.querySelector('.star');
     
   if (moves == 16) {
@@ -109,13 +109,13 @@ function adjustStars() {
 }
 
 //starting and updating the game time
-function startGameTime() {
+function startGameTime () {
   seconds++;
   document.querySelector('.timer').innerHTML = `${seconds} Seconds`;
 } 
 
 //reset everything
-function resetGame() {
+function resetGame () {
   clearInterval(gameTime);
   seconds = 0;
   gameTime = '';
@@ -150,7 +150,7 @@ document.querySelector('.deck').addEventListener('click', function(evt) {
   if (evt.target.className === 'card') {
     
     //if the card is alread in matchedCards, do nothing
-    if (! containsObject(evt.target,matchedCards)) {
+    if (! containsObject(evt.target, matchedCards)) {
 
       //if the times isn't already started, start it
       if (!gameTime) { 
@@ -189,7 +189,7 @@ document.querySelector('.deck').addEventListener('click', function(evt) {
               document.querySelector('#victoryNote').
                 textContent = `With ${moves} moves in ${finishingTime} seconds. Youre rating is ${document.querySelector('.stars').childElementCount} stars.`;
               document.querySelector('#modal').style.display = 'block';
-              document.querySelector('.w3-btn').addEventListener('click', function() {resetGame();});
+              document.querySelector('.w3-btn').addEventListener('click', function () {resetGame(); });
             }    
           
         }
@@ -211,5 +211,5 @@ document.querySelector('.deck').addEventListener('click', function(evt) {
 });
 
 //sets up the event listener for the reset button
-document.querySelector('.reset').addEventListener('click', function() {resetGame();});
+document.querySelector('.reset').addEventListener('click', function () {resetGame(); });
 })();
