@@ -2,9 +2,7 @@
 
 ## Project Description
 
-This is a version of the classic memory game 'Concentration'. 
-
-Based on some static HTML and CSS [starter code](https://github.com/udacity/fend-project-memory-game) I converted it into an interactive game using JavaScript, DOM selectors and Event Listeners.
+Based on some static HTML and CSS [starter code](https://github.com/udacity/fend-project-memory-game), my task was to build a complete browser-based card matching game using JavaScript, DOM selectors and Event Listeners.
 
 ### How the Game Works
 
